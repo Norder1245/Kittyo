@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffebcd;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff4500;
+            font-size: 36px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #ff6347;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Cat Generator</h1>
+    <button onclick="fetchCat()">Get a Cat!</button>
+    <br>
+    <img id="catImage" src="" alt="Random Cat will appear here">
+
+    <script>
+        const API_KEY = "live_YFVNW3McvLjLuctiKQ83gHlZVsGrdD3G8X7J2Llp0fE5WGqldK1BIUaP3J7sctQY";
+        function fetchCat() {
+            fetch("https://api.thecatapi.com/v1/images/search", {
+                headers: { "x-api-key": API_KEY }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("catImage").src = data[0].url;
+            })
+            .catch(error => console.error("Error fetching cat image:", error));
+        }
+    </script>
+</body>
+</html>
